@@ -12,9 +12,16 @@ body {
   min-height: 100vh;
 }
 
-div {
+.container {
   width: 400px;
   height: 400px;
   background-color: lightblue;
-  border: 2px solid;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.square {
+  border: 1px solid;
+  flex: 1 1 25px;
+  height: 25px;
 }
