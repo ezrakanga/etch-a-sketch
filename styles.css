@@ -22,6 +22,6 @@ body {
 
 .square {
   border: 1px solid;
-  flex: 1 1 25px;
-  height: 25px;
+  flex: 1 1 6.25%;
+  height: 6.25%;
 }
