@@ -37,7 +37,45 @@ function changeGridSize() {
 // hover effect
 container.addEventListener('mouseover', (e) => {
   if (e.target.classList.contains('square')) {
-    e.target.style.backgroundColor = 'bisque';
+    // e.target.style.backgroundColor = 'bisque';
+    const square = e.target;
+    let originalR;
+    let originalG;
+    let originalB;
+    let darkenCount;
+
+    if (!square.dataset.originalR) {
+      // generate random color on first interaction
+      originalR = Math.floor(Math.random() * 256);
+      originalG = Math.floor(Math.random() * 256);
+      originalB = Math.floor(Math.random() * 256);
+
+      // store original color values
+      square.dataset.originalR = originalR;
+      square.dataset.originalG = originalG;
+      square.dataset.originalB = originalB;
+      darkenCount = 0;
+    } else {
+      // get stored values for subsequent interactions
+      originalR = parseInt(square.dataset.originalR);
+      originalG = parseInt(square.dataset.originalG);
+      originalB = parseInt(square.dataset.originalB);
+      darkenCount = parseInt(square.dataset.darkenCount) || 0;
+    }
+
+    // limit to 10 darkening steps
+    if (darkenCount < 10) {
+      const darkenFactor = 1 - (darkenCount * 0.1);
+
+      // calculate new color values
+      const newR = Math.round(originalR * darkenFactor);
+      const newG = Math.round(originalG * darkenFactor);
+      const newB = Math.round(originalB * darkenFactor);
+
+      // apply new color and update counter
+      square.style.backgroundColor = `rgb(${newR}, ${newG}, ${newB})`;
+      square.dataset.darkenCount = darkenCount + 1;
+    }
   }
 })
 
